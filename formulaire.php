@@ -2,35 +2,36 @@
     // init variables and errors
     $newTodo = '';
     $errors = ['newTodo' => ''];
-    $file = 'todo.json';
 
-    // check the newTodo and sanitize then entry
+    // check for submission
     if (isset($_POST['add'])) {
+        // assign var
         $newTodo = $_POST['newTodo'];
 
+        // validate and sanitize input
         if (empty($_POST['newTodo'])) {
             $errors['newTodo'] = 'Please enter a new Todo';
         } elseif (strlen($_POST['newTodo']) > 100) {
             $errors['newTodo'] = 'The maximum allowed length is 100 characters';
         } else {
             $newTodo = filter_var($_POST['newTodo'], FILTER_SANITIZE_STRING);
-            echo $newTodo;
         }
-    }
 
-    if (!array_filter($errors)) {
-        // encode to json
-        $encodedTodo = json_encode($newTodo);
-
-
-        // 'a+'	Open for reading and writing; place the file pointer at the end of the file. If the file does not exist, attempt to create it.
-        // sudo chmod -R 777 todo.json
-        $handle = fopen($file, 'a+');
-        // write new todo to the file
-        fwrite($handle, "{$encodedTodo}");
-
-        // close file once we're done
-        fclose($handle);
+        // write to json
+        if (!array_filter($errors)) {
+            $currentJSONTodo = file_get_contents('todo.json');
+            $arrayTodo = json_decode($currentJSONTodo, true);
+            $append = [
+                'task' => $newTodo,
+                'completed' => false,
+            ];
+            $arrayTodo[] = $append;
+            $updatedArrayTodo = json_encode($arrayTodo);
+            if (file_put_contents('todo.json', $updatedArrayTodo)) {
+                $message = 'todo updated';
+                $newTodo = '';
+            }
+        }
     }
 
 ?>

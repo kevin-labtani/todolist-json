@@ -27,7 +27,7 @@
                 M.AutoInit();
             });
             // init char counters for fields with max length
-            var textNeedCount = document.querySelectorAll('#new-todo');
+            var textNeedCount = document.querySelectorAll('#newTodo');
             M.CharacterCounter.init(textNeedCount);
     </script>
     </body>

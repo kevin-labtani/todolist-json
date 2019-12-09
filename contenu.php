@@ -18,7 +18,7 @@
 
 ?>
 
-<!-- ADD todo LIST -->
+        <!-- ADD todo LIST -->
         <div id= "todo-list" class="container section grey lighten-5">
             <div class="row">
                 <div class="col s12 m6 offset-m3 z-depth-2">
@@ -47,7 +47,7 @@
                         <p>
                             <label>
                                 <input type="checkbox" checked disabled />
-                                <span><strike>Eat lunch</strike></span>
+                                <span><del>Eat lunch</del></span>
                             </label>
                         </p>
                     </form>

@@ -11,8 +11,8 @@
         // validate and sanitize input
         if (empty($_POST['newTodo'])) {
             $errors['newTodo'] = 'Please enter a new Todo';
-        } elseif (strlen($_POST['newTodo']) > 100) {
-            $errors['newTodo'] = 'The maximum allowed length is 100 characters';
+        } elseif (strlen($_POST['newTodo']) > 50) {
+            $errors['newTodo'] = 'The maximum allowed length is 50 characters';
         } else {
             $newTodo = filter_var($_POST['newTodo'], FILTER_SANITIZE_STRING);
         }
@@ -52,7 +52,7 @@
                                 name="newTodo"
                                 class="materialize-textarea validate"
                                 id="newTodo"
-                                data-length="100"
+                                data-length="50"
                                 required
                             ><?php echo $newTodo; ?></textarea>
                             <div class="red-text"><?php echo $errors['newTodo'] ?? ''; ?></div>

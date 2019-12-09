@@ -6,5 +6,9 @@
   { "task": "completed this one", "completed": true },
   { "task": "completed this one too", "completed": true },
   { "task": "done?", "completed": false },
-  { "task": "yop", "completed": false }
+  { "task": "yop", "completed": false },
+  {
+    "task": "faraefgeferfkearpfokerpfokrepfkerpforkefpekfperfkp",
+    "completed": false
+  }
 ]

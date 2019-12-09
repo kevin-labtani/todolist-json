@@ -1,29 +1,25 @@
-<?php
-
-
-?>
-
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <!--Import Google Icon Font-->
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <!--Import materialize.css-->
-        <link rel="stylesheet" href="./assets/css/style.css" />
-        
-        <title>Todolist</title>
-    </head>
-    <body>
-        
-        <!--JavaScript at end of body for optimized loading-->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-        <script>
-            // init materialize js stuff
-            document.addEventListener("DOMContentLoaded", function() {
-                M.AutoInit();
-            });
-    </script>
-    </body>
-</html>
+        <!-- ADD todo FORM -->
+        <div id= "" class="container section grey lighten-5">
+            <h4 class="center-align">Add a new todo</h4>
+            <div class="row">
+                <div class="col s12 m6 offset-m3">
+                    <form action="" method="POST" class="add-todo">
+                        <!-- new todo-->
+                        <div class="input-field">
+                            <label for="new-todo" class="grey-text text-darken-4">Enter new todo</label>
+                            <textarea
+                                name="new-todo"
+                                class="materialize-textarea"
+                                id="new-todo"
+                                data-length="200"
+                                required
+                            ><?php echo $SanitizedResult['new-todo'] ?? ''; ?></textarea>
+                            <div class="red-text"><?php echo $errors['new-todo'] ?? ''; ?></div>
+                        </div>
+                        <div class="input-field center">
+                            <button class="btn-large waves-effect waves-light orange" type="submit" name="add" value="add">Add New Todo</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>

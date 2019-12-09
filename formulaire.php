@@ -18,9 +18,13 @@
         }
 
         // write to json
+        // sudo chmod -R 777 todo.json
         if (!array_filter($errors)) {
+            // reads entire file into a string
             $currentJSONTodo = file_get_contents('todo.json');
+            // decode JSON encoded string  into an array
             $arrayTodo = json_decode($currentJSONTodo, true);
+            // prep new task object for appending to file
             $append = [
                 'task' => $newTodo,
                 'completed' => false,
@@ -28,7 +32,6 @@
             $arrayTodo[] = $append;
             $updatedArrayTodo = json_encode($arrayTodo);
             if (file_put_contents('todo.json', $updatedArrayTodo)) {
-                $message = 'todo updated';
                 $newTodo = '';
             }
         }
@@ -37,10 +40,10 @@
 ?>
 <!-- ADD todo FORM -->
         <div id= "" class="container section grey lighten-5">
-            <h4 class="center-align">Add a new todo</h4>
+            <h2 class="center-align">Todo List</h2>
             <div class="row">
                 <div class="col s12 m6 offset-m3">
-                    <form action="" method="POST" class="add-todo">
+                    <form action="index.php" method="POST" class="add-todo">
                         <!-- new todo-->
                         <div class="input-field">
                             <label for="newTodo" class="grey-text text-darken-4">Enter new todo</label>

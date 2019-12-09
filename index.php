@@ -15,8 +15,8 @@
     </head>
     <body class="grey lighten-3">
 
-        <?php require 'contenu.php'; ?>
         <?php require 'formulaire.php'; ?>
+        <?php require 'contenu.php'; ?>
 
         
         <!--JavaScript at end of body for optimized loading-->

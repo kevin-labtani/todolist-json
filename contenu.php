@@ -1,10 +1,30 @@
-        <!-- ADD todo FORM -->
+<?php
+
+    $currentJSONTodo = file_get_contents('todo.json');
+    $arrayTodo = json_decode($currentJSONTodo, true); // array
+
+    function generateTodos($arrayTodo)
+    {
+        foreach ($arrayTodo as $todo) {
+            echo '
+                <p>
+                    <label>
+                        <input type="checkbox" />
+                        <span>'.$todo['task'].'</span>
+                    </label>
+                </p>';
+        }
+    }
+
+?>
+
+<!-- ADD todo LIST -->
         <div id= "todo-list" class="container section grey lighten-5">
-            <h2 class="center-align">Todo List</h2>
             <div class="row">
                 <div class="col s12 m6 offset-m3 z-depth-2">
                     <!-- todo yet to do -->
                     <form action="" method="POST" class="todos">
+                        <?php generateTodos($arrayTodo); ?>
                         <p>
                             <label>
                                 <input type="checkbox" />

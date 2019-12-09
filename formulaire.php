@@ -39,7 +39,7 @@
 
 ?>
 <!-- ADD todo FORM -->
-        <div id= "" class="container section grey lighten-5">
+        <div id= "todo-form" class="container section grey lighten-5">
             <h2 class="center-align">Todo List</h2>
             <div class="row">
                 <div class="col s12 m6 offset-m3">

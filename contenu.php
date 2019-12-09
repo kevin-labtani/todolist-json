@@ -3,7 +3,15 @@
     $currentJSONTodo = file_get_contents('todo.json');
     $arrayTodo = json_decode($currentJSONTodo, true); // array
 
-    function generateTodos($arrayTodo)
+    $arrayIncompleteTodo = array_filter($arrayTodo, function ($todo) {
+        return false === $todo['completed'];
+    });
+
+    $arrayCompleteTodo = array_filter($arrayTodo, function ($todo) {
+        return true === $todo['completed'];
+    });
+
+    function generateIncompleteTodos($arrayTodo)
     {
         foreach ($arrayTodo as $todo) {
             echo '
@@ -11,6 +19,19 @@
                     <label>
                         <input type="checkbox" />
                         <span>'.$todo['task'].'</span>
+                    </label>
+                </p>';
+        }
+    }
+
+    function generateCompleteTodos($arrayTodo)
+    {
+        foreach ($arrayTodo as $todo) {
+            echo '
+                <p>
+                    <label>
+                        <input type="checkbox" checked disabled />
+                        <span><del>'.$todo['task'].'<del></span>
                     </label>
                 </p>';
         }
@@ -24,8 +45,8 @@
                 <div class="col s12 m6 offset-m3 z-depth-2">
                     <!-- todo yet to do -->
                     <form action="" method="POST" class="todos">
-                        <?php generateTodos($arrayTodo); ?>
-                        <p>
+                        <?php generateIncompleteTodos($arrayIncompleteTodo); ?>
+                        <!-- <p>
                             <label>
                                 <input type="checkbox" />
                                 <span>Complete todo challenge</span>
@@ -36,21 +57,22 @@
                                 <input type="checkbox" checked/>
                                 <span>Go to sleep early</span>
                             </label>
-                        </p>
+                        </p> -->
                         <div class="input-field left-align">
                             <button class="btn waves-effect waves-light orange" type="submit" name="submit" value="submit" disabled>Submit</button>
                         </div>
                     </form>
                     <!-- todo completed -->
-                    <h5 id="completed">Completed todos</h5>
-                    <form action="" method="" class="completed">
-                        <p>
+                    <h5>Completed todos</h5>
+                    <div class="completed">
+                        <?php generateCompleteTodos($arrayCompleteTodo); ?>
+                        <!-- <p>
                             <label>
                                 <input type="checkbox" checked disabled />
                                 <span><del>Eat lunch</del></span>
                             </label>
-                        </p>
-                    </form>
+                        </p> -->
+                    </div>
                 </div>
             </div>
         </div>

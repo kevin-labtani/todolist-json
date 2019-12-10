@@ -30,7 +30,7 @@
                 'completed' => false,
             ];
             $arrayTodo[] = $append;
-            // encode back to JSOn and then write to file
+            // encode back to JSON and then write to file
             $updatedArrayTodo = json_encode($arrayTodo);
             if (file_put_contents('todo.json', $updatedArrayTodo)) {
                 $newTodo = '';

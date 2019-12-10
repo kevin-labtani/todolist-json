@@ -20,10 +20,10 @@
         foreach ($arrayTodo as $todo) {
             echo '
             <p>
-            <label>
-            <input type="checkbox" />
-            <span>'.$todo['task'].'</span>
-            </label>
+                <label>
+                    <input type="checkbox" />
+                    <span>'.$todo['task'].'</span>
+                </label>
             </p>';
         }
     }
@@ -51,18 +51,6 @@
                     <!-- incomplete todos -->
                     <form action="" method="POST" class="todos">
                         <?php generateIncompleteTodos($arrayIncompleteTodo); ?>
-                        <!-- <p>
-                            <label>
-                                <input type="checkbox" />
-                                <span>Complete todo challenge</span>
-                            </label>
-                        </p>
-                        <p>
-                            <label>
-                                <input type="checkbox" checked/>
-                                <span>Go to sleep early</span>
-                            </label>
-                        </p> -->
                         <div class="input-field left-align">
                             <button class="btn waves-effect waves-light orange" type="submit" name="submit" value="submit" disabled>Submit</button>
                         </div>
@@ -71,12 +59,6 @@
                     <h5>Completed todos</h5>
                     <div class="completed">
                         <?php generateCompleteTodos($arrayCompleteTodo); ?>
-                        <!-- <p>
-                            <label>
-                                <input type="checkbox" checked disabled />
-                                <span><del>Eat lunch</del></span>
-                            </label>
-                        </p> -->
                     </div>
                 </div>
             </div>

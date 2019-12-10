@@ -19,7 +19,7 @@
     {
         foreach ($arrayTodo as $todo) {
             echo '
-            <p draggable="true">
+            <p draggable="true" class="draggable" >
                 <label>
                     <input type="checkbox"  class="toDo" />
                     <span>'.$todo['task'].'</span>
@@ -41,7 +41,12 @@
                 </p>';
         }
     }
-
+    ?>
+<?php
+    //Get and modify the JSON file ("completed")
+    if (isset($POST['submit'])) {
+        
+    } 
 ?>
 
         <!-- ADD todo LIST -->
@@ -52,18 +57,6 @@
                     <form action="" method="POST" class="todos">
                     <div id="toDoList">
                         <?php generateIncompleteTodos($arrayIncompleteTodo); ?> 
-                        <!-- <p draggable="true">
-                             <label>
-                                <input class="toDo" type="checkbox" />
-                                <span>Complete todo challenge</span>
-                            </label>
-                        </p>
-                        <p draggable="true">
-                            <label>
-                                <input class="toDo" type="checkbox"/>
-                                <span>Go to sleep early</span>
-                            </label>
-                        </p> -->
                     </div>
                         <div class="input-field left-align">
                             <button class="btn waves-effect waves-light orange" type="submit" name="submit" value="submit" id="submit" disabled>Submit</button>

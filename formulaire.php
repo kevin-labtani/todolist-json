@@ -58,7 +58,7 @@
                             <div class="red-text"><?php echo $errors['newTodo'] ?? ''; ?></div>
                         </div>
                         <div class="input-field center">
-                            <button class="btn-large waves-effect waves-light orange" type="submit" name="add" value="add">Add New Todo</button>
+                            <button class="btn waves-effect waves-light orange" type="submit" name="add" value="add">Add New Todo</button>
                         </div>
                     </form>
                 </div>

@@ -21,8 +21,8 @@
             echo '
             <p draggable="true" class="draggable" >
                 <label>
-                    <input type="checkbox"  class="toDo" />
-                    <span>'.$todo['task'].'</span>
+                    <input type="checkbox"  name="task[]" class="toDo" value="'.$todo['task'].'" />
+                    <span >'.$todo['task'].'</span>
                 </label>
             </p>';
         }
@@ -41,13 +41,29 @@
                 </p>';
         }
     }
-    ?>
-<?php
-    //Get and modify the JSON file ("completed")
-    if (isset($POST['submit'])) {
-        
-    } 
+    // print_r($arrayTodo);
+    // print_r($arrayTodo[0][completed]);
+if (isset($_POST['submit'])) {
+    $task = "";
+    $task = $_POST['task'];
+    $currentJSONTodo = file_get_contents('todo.json');
+    $arrayTodo = json_decode($currentJSONTodo, true);
+    echo count($task);
+    for ($y = 0; $y < count($task); $y++){
+        for ($i = 0; $i < count($arrayTodo); $i++) {
+            if ($arrayTodo[$i][task] == $task[$y]) {
+                print_r($arrayTodo[$i]);
+                $arrayTodo[$i][completed] = true;
+            }
+        }
+    }
+    $updated = json_encode($arrayTodo);
+    if (file_put_contents('todo.json', $updated)) {
+       echo('yes');
+    }
+}
 ?>
+
 
         <!-- ADD todo LIST -->
         <div id= "todo-list" class="container section grey lighten-5">

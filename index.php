@@ -11,13 +11,12 @@
         <!--Import materialize.css-->
         <link rel="stylesheet" href="./assets/css/style.css" />
         
-        <title>Todolist</title>
+        <title>Todo list</title>
     </head>
     <body class="grey lighten-3">
 
-        <?php require 'contenu.php'; ?>
         <?php require 'formulaire.php'; ?>
-
+        <?php require 'contenu.php'; ?>
         
         <!--JavaScript at end of body for optimized loading-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
@@ -27,7 +26,7 @@
                 M.AutoInit();
             });
             // init char counters for fields with max length
-            var textNeedCount = document.querySelectorAll('#new-todo');
+            var textNeedCount = document.querySelectorAll('#newTodo');
             M.CharacterCounter.init(textNeedCount);
     </script>
     </body>

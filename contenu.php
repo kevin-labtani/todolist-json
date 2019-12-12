@@ -14,7 +14,6 @@
         return true === $todo['completed'];
     });
 
-
     // generate incomplete todos view
     function generateIncompleteTodos($arrayTodo)
     {
@@ -42,18 +41,37 @@
         }
     }
 
-
+    // valeryia stuff 
+    if (isset($_POST['submit'])) {
+        $task = '';
+        $task = $_POST['task'];
+        $currentJSONTodo = file_get_contents('todo.json');
+        echo $currentJSONTodo;
+        $arrayTodo = json_decode($currentJSONTodo, true);
+        for ($y = 0; $y < count($task); ++$y) {
+            for ($i = 0; $i < count($arrayTodo); ++$i) {
+                if ($arrayTodo[$i]["task"] == $task[$y]) {
+                    $arrayTodo[$i]["completed"] = true;
+                }
+            }
+        }
+        $updated = json_encode($arrayTodo);
+        if (file_put_contents('todo.json', $updated)) {
+            echo 'yes';
+        }
+    }
 ?>
-
         <!-- ADD todo LIST -->
         <div id= "todo-list" class="container section grey lighten-5">
             <div class="row">
                 <div class="col s12 m6 offset-m3 z-depth-2">
                     <!-- incomplete todos -->
-                    <form action="" method="POST" class="todos">
-                        <?php generateIncompleteTodos($arrayIncompleteTodo); ?>
+                    <form action="" method="POST" class="todos" id="todos">
+                    <div id="toDoList">
+                        <?php generateIncompleteTodos($arrayIncompleteTodo); ?> 
+                    </div>
                         <div class="input-field left-align">
-                            <button class="btn waves-effect waves-light orange" type="submit" name="submit" value="submit" disabled>Submit</button>
+                            <button class="btn waves-effect waves-light orange" type="submit" name="submit" value="submit" id="submit" disabled>Submit</button>
                         </div>
                     </form>
                     <!-- complete todos -->
@@ -64,3 +82,4 @@
                 </div>
             </div>
         </div>
+    <script src="assets/js/script.js"></script>

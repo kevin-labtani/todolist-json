@@ -1,6 +1,1 @@
-[
-  { "id": 0, "task": "first todo", "completed": false },
-  { "id": 1, "task": "second todo", "completed": false },
-  { "id": 2, "task": "third todo", "completed": false },
-  { "id": 3, "task": "completed todo", "completed": true }
-]
+[{"id":0,"task":"first todo","completed":false},{"id":1,"task":"second todo","completed":false},{"id":2,"task":"third todo","completed":false},{"id":3,"task":"completed todo","completed":true},{"id":4,"task":"todo from dev branch","completed":false}]

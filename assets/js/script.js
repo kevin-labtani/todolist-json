@@ -33,45 +33,11 @@ fetch('todo.json', {
                     //To sent the JSON to PHP 
                     submit.addEventListener('click', e => {
                         e.preventDefault();
-                        function sentJSON() {
-                            let xhr = new XMLHttpRequest();
-                            let url = "contenu.php";
-
-                            xhr.open("POST", url, true);
-                            xhr.setRequestHeader("Content-Type", "applicaton/json");
-
-                            let data = JSON.stringify(todoData);
-                            xhr.send(data);
-                            console.log(data);
-
-                            xhr.onreadystatechange = function() {
-                                if (xhr.readyState === 4 && xhr.status === 200) {
-                                    alert("works");
-                                }
-                            };
-
-                        } sentJSON();
-                //         function AJAX (url, method_1, data) {
-                //             console.log(todoData);
-                //             const newForm = new FormData(todoData);
-                // console.log(newForm);
-                            // fetch(url, {
-                            //         method: method_1,
-                            //         body: JSON.stringify(data),
-                            //         headers: {
-                            //             "Content-Type": "application/json"
-                            //         },
-                            //         credentials: "same-origin"
-                            //     });
-                        //     let xhr = new XMLHttpRequest();
-                        //     xhr.open(method_1, url, true);
-                        //     xhr.send(data);
-                        //     if (xhr.status === 200) {
-                        //         alert('work');
-                        //     } else {
-                        //         alert('not work ' + xhr.status);
-                        //     }
-                        // }; AJAX('contenu.php', 'POST', todoData);
+                        let newForm = new FormData();
+                        newForm.append("json", JSON.stringify(todoData));
+                        fetch("contenu.json", {method: "POST", body: newForm})
+                            .then((res) => res.text())
+                            .then((data) => console.log(data));
                     });
                 }
             });
@@ -141,44 +107,3 @@ let listItens = document.querySelectorAll('.draggable');
 [].forEach.call(listItens, function(item) {
     addEventsDragAndDrop(item);
 });
-
-
-
-  //     function z (){
-                    //     fetch('contenu.php', {
-                    //         method: "POST",
-                    //         data: JSON.stringify(todoData),
-                    //         headers: {
-                    //             "Content-Type": "application/json"
-                    //         },
-                    //         credentials: "same-origin"
-                    //     });
-                    // }; z();
-                        // const newForm = new FormData(todoData);
-                        // console.log(newForm);
-                        // newForm.append('submit', true);
-                        // newForm.append('task', todoData);
-                        // console.log(newForm);
-                        // fetch('contenu.php', {
-                        //     'method': 'POST',
-                        //     // 'body': JSON.stringify(todoData)
-                        //     'body': newForm
-                        // }).then(data => {
-                        //     console.log(data);
-                        //     data.json();
-                        // }).then(result => console.log(result));
-                    // fetch({
-                    //     type: 'POST',
-                    //     processData: false,
-                    //     contentType: false,
-                    //     url: 'contenu.php',
-                    //     data: todoData,
-                    //     dataType: "json",
-                    //     success: function(data){
-                    //         alert(data);
-                    //     },
-                    //     error: function(e){
-                    //         alert("error")
-                    //     }
-                                        
-                        // });

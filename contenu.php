@@ -41,41 +41,7 @@
                 </p>';
         }
     }
-//     // print_r($_REQUEST);
-//     echo ($_REQUEST['xhr']);
-//  $todoData = $_REQUEST['todoData'];
-//  print_r($_REQUEST['data']);
-//  print_r($_REQUEST['submit']);
-//  if (isset($_POST['data'])) {
-//     $json = file_get_contents('php://input');
-//         $obj = json_decode($json);
-//         echo ($obj);
-//      echo 'hello';
-//     $todoData = $_REQUEST['todoData'];
-//     print_r($_REQUEST['data']);
-//     print_r($_REQUEST['submit']);
-//     print_r($_REQUEST);
-//     $json = file_get_contents('php://input');
-// $obj = json_decode($json);
-// echo ($obj->id);
-//  };
-//  echo $_POST;
-//  print_r($_POST);
-//     print_r($data1);
 
-// var_dump($_POST);
-// if(isset($_POST['submit'])){
-// var_dump($_POST);
-// echo "hello";
-// }
-// if($_SERVER['REQUEST_METHOD'] === 'POST') {
-//     var_dump($_POST);
-// } else {
-//     alert("no");
-// };
-if(!empty($_POST['data'])){
-    var_dump($_POST['data']);
-}
 if (isset($_POST['submit'])) {
     $task = "";
     $task = $_POST['task'];
@@ -96,24 +62,20 @@ if (isset($_POST['submit'])) {
 }
 ?>
 <?php 
-// $h = $_POST('data');
-// if($_POST('data') !== NULL){
-//     echo 'hello';
-//     // $myarray = &$_POST;
-//     // $var = $myarray;
-//     // echo $myarray;
-//     // print_r($var);
-//     // $json = file_get_contents('php://input');
-//     // $obj = json_decode($json);
-//     // echo ($obj);
-// };
-
-//  $todoData = $_POST['data'];
-//  echo $todoData;
-// //  header("Content-Type: application/json; charset=utf-8");
-//  // $data1 = json_decode(file_get_contents('php://input'));
-//  $reponse = array($todoData);
-//  echo json_decode($reponse);
+echo $_POST['json'];
+echo "h";
+ if (isset($_POST['json'])) {
+    var_dump($_POST['json']);
+    $h = $_POST['json'];
+    echo $h;
+    echo "hello";
+}
+if (!empty($_POST['json'])) {
+    var_dump($_POST['json']);
+    $h = $_POST['json'];
+    echo $h;
+    echo "hello";
+}
 ?>
         <!-- ADD todo LIST -->
         <div id= "todo-list" class="container section grey lighten-5">

@@ -35,7 +35,7 @@ fetch('todo.json', {
                         e.preventDefault();
                         let newForm = new FormData();
                         newForm.append("json", JSON.stringify(todoData));
-                        fetch("contenu.json", {method: "POST", body: newForm})
+                        fetch("contenu.php", {method: "POST", body: newForm})
                             .then((res) => res.text())
                             .then((data) => console.log(data));
                     });

@@ -1,30 +1,87 @@
-// To make a button submit disabled
-const toDo = Array.from(document.getElementsByClassName("toDo"));
 const submit = document.getElementById("submit");
-toDo.map(task => {
-    task.addEventListener('click', e => {
-        const validation = [];
-        for(let i = 0; i < toDo.length; i++) {
-            if (toDo[i].checked == true) {
-                validation.push(task[i]);
-            } 
-        }
-        if (validation.length == 0) {
-            submit.setAttribute('disabled', 'disabled');
-        } else {
-            submit.removeAttribute('disabled');
-        }
+const toDoList = document.getElementById("toDoList");
+
+//AJAX
+fetch('todo.json', {
+    'method': 'GET'
+}).then(data => data.json()).then(result => {
+    const todoData = result;
+        let toDo = Array.from(document.getElementsByClassName("toDo"));
+        toDo.map(task => {
+            task.addEventListener('click', e => {
+                const taskId = e.target.getAttribute('id');
+                todoData.forEach(todoTask => {
+                    if (todoTask.id == taskId) {
+                        if (document.getElementById(taskId).checked == true) {
+                            todoTask.completed = true;
+                        } else {
+                            todoTask.completed = false;
+                        }
+                    }
+                });
+                // To make a button submit disabled
+                const validation = [];
+                for(let i = 0; i < toDo.length; i++) {
+                    if (toDo[i].checked == true) {
+                        validation.push(task[i]);
+                    } 
+                }
+                if (validation.length == 0) {
+                    submit.setAttribute('disabled', 'disabled');
+                } else {
+                    submit.removeAttribute('disabled');
+                    //To sent the JSON to PHP 
+                    submit.addEventListener('click', e => {
+                        e.preventDefault();
+                        function sentJSON() {
+                            let xhr = new XMLHttpRequest();
+                            let url = "contenu.php";
+
+                            xhr.open("POST", url, true);
+                            xhr.setRequestHeader("Content-Type", "applicaton/json");
+
+                            let data = JSON.stringify(todoData);
+                            xhr.send(data);
+                            console.log(data);
+
+                            xhr.onreadystatechange = function() {
+                                if (xhr.readyState === 4 && xhr.status === 200) {
+                                    alert("works");
+                                }
+                            };
+
+                        } sentJSON();
+                //         function AJAX (url, method_1, data) {
+                //             console.log(todoData);
+                //             const newForm = new FormData(todoData);
+                // console.log(newForm);
+                            // fetch(url, {
+                            //         method: method_1,
+                            //         body: JSON.stringify(data),
+                            //         headers: {
+                            //             "Content-Type": "application/json"
+                            //         },
+                            //         credentials: "same-origin"
+                            //     });
+                        //     let xhr = new XMLHttpRequest();
+                        //     xhr.open(method_1, url, true);
+                        //     xhr.send(data);
+                        //     if (xhr.status === 200) {
+                        //         alert('work');
+                        //     } else {
+                        //         alert('not work ' + xhr.status);
+                        //     }
+                        // }; AJAX('contenu.php', 'POST', todoData);
+                    });
+                }
+            });
+        });
     });
-});
-
-submit.addEventListener('click', e => {
-
-});
 
 //drag-drop
 
     //Get elements
-let draggables = document.querySelector('.draggable');
+// let draggables = document.querySelector('.draggable');
 
     //Start of the movement of an element
 function dragStart(e) {
@@ -39,7 +96,7 @@ function dragEnter(e) {
     this.classList.add('over');
 }
 
-    //The cursor leave the element
+    //The cursor leaves the element
 function dragLeave(e) {
     e.stopPropagation();
     this.classList.remove('over');
@@ -52,7 +109,7 @@ function dragOver(e) {
     return false;
 }
 
-    //get data of element and put them in right place
+    //get data of the element and put it in right place
 function dragDrop(e) {
     if (dragSrcEl != this) {
     dragSrcEl.innerHTML = this.innerHTML;
@@ -79,8 +136,49 @@ function addEventsDragAndDrop(el) {
     el.addEventListener('dragend', dragEnd, false);
 }
 
-    //take elements to use in a function
+    //to take elements to use in a function
 let listItens = document.querySelectorAll('.draggable');
 [].forEach.call(listItens, function(item) {
     addEventsDragAndDrop(item);
 });
+
+
+
+  //     function z (){
+                    //     fetch('contenu.php', {
+                    //         method: "POST",
+                    //         data: JSON.stringify(todoData),
+                    //         headers: {
+                    //             "Content-Type": "application/json"
+                    //         },
+                    //         credentials: "same-origin"
+                    //     });
+                    // }; z();
+                        // const newForm = new FormData(todoData);
+                        // console.log(newForm);
+                        // newForm.append('submit', true);
+                        // newForm.append('task', todoData);
+                        // console.log(newForm);
+                        // fetch('contenu.php', {
+                        //     'method': 'POST',
+                        //     // 'body': JSON.stringify(todoData)
+                        //     'body': newForm
+                        // }).then(data => {
+                        //     console.log(data);
+                        //     data.json();
+                        // }).then(result => console.log(result));
+                    // fetch({
+                    //     type: 'POST',
+                    //     processData: false,
+                    //     contentType: false,
+                    //     url: 'contenu.php',
+                    //     data: todoData,
+                    //     dataType: "json",
+                    //     success: function(data){
+                    //         alert(data);
+                    //     },
+                    //     error: function(e){
+                    //         alert("error")
+                    //     }
+                                        
+                        // });

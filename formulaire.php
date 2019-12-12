@@ -26,6 +26,7 @@
             $arrayTodo = json_decode($currentJSONTodo, true);
             // prep new task object for appending to file
             $append = [
+                'id' => sizeof($arrayTodo),
                 'task' => $newTodo,
                 'completed' => false,
             ];

@@ -1,12 +1,6 @@
 [
-  { "task": "add first", "completed": false },
-  { "task": "new todo", "completed": false },
-  { "task": "completed this one", "completed": true },
-  { "task": "completed this one too", "completed": true },
-  { "task": "done?", "completed": false },
-  {
-    "task": "faraefgeferfkearpfokerpfokrepfkerpforkefpekfperfkp",
-    "completed": false
-  },
-  { "task": "hello val", "completed": false }
+  { "id": 0, "task": "first todo", "completed": false },
+  { "id": 1, "task": "second todo", "completed": false },
+  { "id": 2, "task": "third todo", "completed": false },
+  { "id": 3, "task": "completed todo", "completed": true }
 ]

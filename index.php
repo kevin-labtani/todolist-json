@@ -29,5 +29,6 @@
             var textNeedCount = document.querySelectorAll('#newTodo');
             M.CharacterCounter.init(textNeedCount);
     </script>
+    <script src="assets/js/script.js"></script>
     </body>
 </html>

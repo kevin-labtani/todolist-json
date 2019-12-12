@@ -14,33 +14,34 @@
         return true === $todo['completed'];
     });
 
+
     // generate incomplete todos view
     function generateIncompleteTodos($arrayTodo)
     {
         foreach ($arrayTodo as $todo) {
             echo '
-            <p>
+            <p draggable="true" class="draggable" >
                 <label>
-                    <input type="checkbox" />
-                    <span>'.$todo['task'].'</span>
+                    <input id="'.$todo['id'].'" type="checkbox"  name="task[]" class="toDo" value="'.$todo['task'].'" />
+                    <span >'.$todo['task'].'</span>
                 </label>
             </p>';
         }
     }
-
     // generate complete todos view
     function generateCompleteTodos($arrayTodo)
     {
         foreach ($arrayTodo as $todo) {
             echo '
-                <p>
+                <p class="draggable" draggable="true">
                     <label>
-                        <input type="checkbox" checked disabled />
+                        <input id="'.$todo['id'].'" type="checkbox" checked disabled />
                         <span><del>'.$todo['task'].'</del></span>
                     </label>
                 </p>';
         }
     }
+
 
 ?>
 

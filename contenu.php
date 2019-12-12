@@ -19,9 +19,9 @@
     {
         foreach ($arrayTodo as $todo) {
             echo '
-            <p draggable="true" class="draggable" >
+            <p class="draggable" draggable="true" id="linecheck' . $todo['id'] . '">
                 <label>
-                    <input id="' . $todo['id'] . '" type="checkbox"  name="task[]" class="toDo" value="'.$todo['task'].'" />
+                    <input id="check' . $todo['id'] . '" type="checkbox"  name="task[]" class="toDo" value="'.$todo['task'].'" />
                     <span >'.$todo['task'].'</span>
                 </label>
             </p>';
@@ -41,41 +41,6 @@
                 </p>';
         }
     }
-
-if (isset($_POST['submit'])) {
-    $task = "";
-    $task = $_POST['task'];
-    $currentJSONTodo = file_get_contents('todo.json');
-    echo $currentJSONTodo;
-    $arrayTodo = json_decode($currentJSONTodo, true);
-    for ($y = 0; $y < count($task); $y++){
-        for ($i = 0; $i < count($arrayTodo); $i++) {
-            if ($arrayTodo[$i][task] == $task[$y]) {
-                $arrayTodo[$i][completed] = true;
-            }
-        }
-    }
-    $updated = json_encode($arrayTodo);
-    if (file_put_contents('todo.json', $updated)) {
-        echo ('yes');
-    }
-}
-?>
-<?php 
-echo $_POST['json'];
-echo "h";
- if (isset($_POST['json'])) {
-    var_dump($_POST['json']);
-    $h = $_POST['json'];
-    echo $h;
-    echo "hello";
-}
-if (!empty($_POST['json'])) {
-    var_dump($_POST['json']);
-    $h = $_POST['json'];
-    echo $h;
-    echo "hello";
-}
 ?>
         <!-- ADD todo LIST -->
         <div id= "todo-list" class="container section grey lighten-5">
@@ -92,7 +57,7 @@ if (!empty($_POST['json'])) {
                     </form>
                     <!-- complete todos -->
                     <h5>Completed todos</h5>
-                    <div class="completed">
+                    <div class="completed" id="completed">
                         <?php generateCompleteTodos($arrayCompleteTodo); ?>
                     </div>
                 </div>

@@ -23,7 +23,7 @@
             <p id="linecheck' . $todo['id'] . '">
                 <label>
                     <input id="check' . $todo['id'] . '" type="checkbox"  name="task[]" class="toDo" value="'.$todo['task'].'" />
-                    <span class="draggable" draggable="true">'.$todo['task'].'</span>
+                    <span id="' . $todo['id'] . '" class="draggable" draggable="true">'.$todo['task'].'</span>
                 </label>
             </p>';
         }
@@ -35,7 +35,7 @@
             echo '
                 <p>
                     <label>
-                        <input id="' . $todo['id'] . '" type="checkbox" checked disabled />
+                        <input id="checked' . $todo['id'] . '" type="checkbox" checked disabled />
                         <span><del>'.$todo['task'].'</del></span>
                     </label>
                 </p>';

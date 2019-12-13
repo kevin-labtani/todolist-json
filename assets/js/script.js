@@ -8,20 +8,32 @@ fetch('todo.json', {
         const todoData = result;
         let toDo = Array.from(document.getElementsByClassName("toDo"));
         toDo.map(task => {
-            let draggedId = task.getAttribute("id");
-            task.parentElement.querySelector("#" + draggedId).addEventListener('click', e => {
+            // let draggedId = task.getAttribute("id");parentElement.querySelector("#" + draggedId)
+            task.addEventListener('click', e => {
                 const taskId = e.target.getAttribute('id');
                 todoData.forEach(todoTask => {
                     if ("check" + todoTask.id == taskId) {
+                        //add a status complited true
                         if (document.getElementById(taskId).checked == true) {
                             todoTask.completed = true;
-                            checked.push(taskId);
-                        } else {
+                            //Check if the element is not in the array to validate the button submit, if not add the element in the array
+                                if(checked.indexOf(taskId) === -1) {
+                                    checked.push(taskId); 
+                                }
+                            //add a status complited false 
+                        } else if (document.getElementById(taskId).checked == false) {
                             todoTask.completed = false;
+                            //Check if the element is in the array to validate the button submit, if yes,to delete the element from the array
+                            if(checked.indexOf(taskId) == 0 || checked.indexOf(taskId) >= 0) {
+                                let index = checked.indexOf(taskId);
+                                checked.splice(index, index);
+                                if (checked.indexOf(taskId) == 0) {
+                                    checked.shift();
+                                }
+                            }
                         }
                     }
                 });
-                console.log(checked);
                 // To make a button submit disabled
                 const validation = [];
                 for(let i = 0; i < toDo.length; i++) {

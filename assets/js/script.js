@@ -1,24 +1,27 @@
 const submit = document.getElementById("submit");
 const toDoList = document.getElementById("toDoList");
-
+let checked = [];
 //AJAX
 fetch('todo.json', {
     'method': 'GET'
 }).then(data => data.json()).then(result => {
-    const todoData = result;
+        const todoData = result;
         let toDo = Array.from(document.getElementsByClassName("toDo"));
         toDo.map(task => {
-            task.addEventListener('click', e => {
+            let draggedId = task.getAttribute("id");
+            task.parentElement.querySelector("#" + draggedId).addEventListener('click', e => {
                 const taskId = e.target.getAttribute('id');
                 todoData.forEach(todoTask => {
-                    if (todoTask.id == taskId) {
+                    if ("check" + todoTask.id == taskId) {
                         if (document.getElementById(taskId).checked == true) {
                             todoTask.completed = true;
+                            checked.push(taskId);
                         } else {
                             todoTask.completed = false;
                         }
                     }
                 });
+                console.log(checked);
                 // To make a button submit disabled
                 const validation = [];
                 for(let i = 0; i < toDo.length; i++) {
@@ -35,9 +38,29 @@ fetch('todo.json', {
                         e.preventDefault();
                         let newForm = new FormData();
                         newForm.append("json", JSON.stringify(todoData));
-                        fetch("contenu.php", {method: "POST", body: newForm})
-                            .then((res) => res.text())
-                            .then((data) => console.log(data));
+                        fetch("http://localhost/PHP/Projets/todolist-json/ajax.php", {
+                            method: "POST", 
+                            body: newForm
+                        })
+                            .then((res) => res.json())
+                            //to deplace the element to completed
+                            .then((data) => {
+                                for(i = 0; i < checked.length; i++){
+                                    //get the completed task
+                                    let completedTask  = document.getElementById("line" + checked[i]);
+                                    //get the completed area
+                                    let completed = document.getElementById("completed");
+                                    //add the completed task
+                                    completed.appendChild(completedTask);
+                                    //change style of the completed
+                                    completedTask.querySelector("input").setAttribute("disabled", "disabled");
+                                    completedTask.querySelector("span").setAttribute("style", "text-decoration: line-through;");
+                                    //Check if there is no comleted tasks in the array, if true clean - the array
+                                    if (i-1 == checked.length ) {
+                                        checked = [];
+                                    }
+                                }
+                            });
                     });
                 }
             });
@@ -47,7 +70,8 @@ fetch('todo.json', {
 //drag-drop
 
     //Get elements
-// let draggables = document.querySelector('.draggable');
+let draggables = document.querySelector('.draggable');
+console.log(draggables);
 
     //Start of the movement of an element
 function dragStart(e) {

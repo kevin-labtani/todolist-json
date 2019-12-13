@@ -19,9 +19,9 @@
     {
         foreach ($arrayTodo as $todo) {
             echo '
-            <p draggable="true" class="draggable" >
+            <p class="draggable" draggable="true" id="linecheck' . $todo['id'] . '">
                 <label>
-                    <input id="'.$todo['id'].'" type="checkbox"  name="task[]" class="toDo" value="'.$todo['task'].'" />
+                    <input id="check' . $todo['id'] . '" type="checkbox"  name="task[]" class="toDo" value="'.$todo['task'].'" />
                     <span >'.$todo['task'].'</span>
                 </label>
             </p>';
@@ -34,30 +34,10 @@
             echo '
                 <p class="draggable" draggable="true">
                     <label>
-                        <input id="'.$todo['id'].'" type="checkbox" checked disabled />
+                        <input id="' . $todo['id'] . '" type="checkbox" checked disabled />
                         <span><del>'.$todo['task'].'</del></span>
                     </label>
                 </p>';
-        }
-    }
-
-    // valeryia stuff 
-    if (isset($_POST['submit'])) {
-        $task = '';
-        $task = $_POST['task'];
-        $currentJSONTodo = file_get_contents('todo.json');
-        echo $currentJSONTodo;
-        $arrayTodo = json_decode($currentJSONTodo, true);
-        for ($y = 0; $y < count($task); ++$y) {
-            for ($i = 0; $i < count($arrayTodo); ++$i) {
-                if ($arrayTodo[$i]["task"] == $task[$y]) {
-                    $arrayTodo[$i]["completed"] = true;
-                }
-            }
-        }
-        $updated = json_encode($arrayTodo);
-        if (file_put_contents('todo.json', $updated)) {
-            echo 'yes';
         }
     }
 ?>
@@ -76,10 +56,9 @@
                     </form>
                     <!-- complete todos -->
                     <h5>Completed todos</h5>
-                    <div class="completed">
+                    <div class="completed" id="completed">
                         <?php generateCompleteTodos($arrayCompleteTodo); ?>
                     </div>
                 </div>
             </div>
         </div>
-    <script src="assets/js/script.js"></script>

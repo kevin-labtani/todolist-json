@@ -1,6 +1,6 @@
 # To-do list, en PHP, JSON et AJAX
 
-![Aperçu du projet - capture d’écran](./assets/img/.png)
+![Aperçu du projet - capture d’écran](./assets/img/capture.png)
 
 ## Présentation du Projet
 
@@ -20,8 +20,8 @@ Le Projet consiste en un outil de gestion de tâches basique comprenant:
 
 ## Contributeurs
 
-- [**Kevin Labtani**](https://github.com/kevin-labtani)
 - [**Valeriya Kozlova**](https://github.com/ValeriyaKozlova)
+- [**Kevin Labtani**](https://github.com/kevin-labtani)
 
 ## Langages et technologies
 

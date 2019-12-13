@@ -1,7 +1,15 @@
 const submit = document.getElementById("submit");
 const toDoList = document.getElementById("toDoList");
 let checked = [];
-//AJAX
+//AJAX NEWTODO => TODO
+// const addNewTodo = document.getElementById("")
+// fetch('todo.json', {
+//     'method': 'GET'
+// }).then(data => data.json()).then(result => {
+//         const todoData = result;
+//         let toDo = Array.from(document.getElementsByClassName("toDo"));
+//         toDo.map(task => {
+//AJAX TODO => COMPLETED
 fetch('todo.json', {
     'method': 'GET'
 }).then(data => data.json()).then(result => {
@@ -31,6 +39,7 @@ fetch('todo.json', {
                         }
                     }
                 });
+                console.log(checked);
                 // To make a button submit disabled
                 const validation = [];
                 for(let i = 0; i < toDo.length; i++) {
@@ -83,6 +92,38 @@ let draggables = document.querySelector('.draggable');
 
     //Start of the movement of an element
 function dragStart(e) {
+    let list = document.getElementById("toDoList");
+    let tasksToDo = Array.from(list.querySelectorAll("input"));
+    let idThis;
+    console.log(tasksToDo)
+    console.log(list)
+    // tasksToDo.forEach(task => 
+    //     task.checked = false,
+    //     idThis = "check" + task.getAttribute("id");
+    //     for(let i = 0; i < checked.length; i++) {
+    //         if (idThis === checked[i]) {
+    //             let ind = checked.indexOf(idThis);
+    //             checked.splice(ind, 1);
+    //             console.log(checked);
+    //         }
+    //     }
+    // );
+    // this.previousElementSibling.checked = false;
+    let idThis = "check" + this.getAttribute("id");
+    console.log(idThis);
+    for(let i = 0; i < checked.length; i++) {
+        if (idThis === checked[i]) {
+            let ind = checked.indexOf(idThis);
+            checked.splice(ind, 1);
+            console.log(checked);
+        }
+    }
+    if (checked.length == 0) {
+        submit.setAttribute('disabled', 'disabled');
+    } else {
+        submit.removeAttribute('disabled');
+    }
+    this.previousElementSibling.setAttribute("disabled", "disabled");
     this.style.opacity = '0.4'; //change style
     dragSrcEl = this; // the element
     e.dataTransfer.effectAllowed = 'move'; 
@@ -118,6 +159,7 @@ function dragDrop(e) {
 
     //it works when the action is finished
 function dragEnd(e) {
+    this.previousElementSibling.removeAttribute("disabled");
     let listItens = document.querySelectorAll('.draggable');
     [].forEach.call(listItens, function(item) {
     item.classList.remove('over');

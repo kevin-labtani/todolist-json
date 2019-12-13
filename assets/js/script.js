@@ -46,22 +46,20 @@ fetch('todo.json', {
                             //to deplace the element to completed
                             .then((data) => {
                                 for(i = 0; i < checked.length; i++){
-                                    let remove = document.getElementById("line" + checked[i]);
-                                    let newChild = remove;
+                                    //get the completed task
+                                    let completedTask  = document.getElementById("line" + checked[i]);
+                                    //get the completed area
                                     let completed = document.getElementById("completed");
-                                    completed.appendChild(newChild);
-                                    newChild.querySelector("input").setAttribute("disabled", "disabled");
-                                    // const text = newChild.querySelector("span").innerHTML;
-                                    // const span = newChild.querySelector("span");
-                                    // const del = document.createElement("del");
-                                    // span.appendChild(del);
-                                    // del.innerHTML = text;
-                                    // span.innerHTML = "";
+                                    //add the completed task
+                                    completed.appendChild(completedTask);
+                                    //change style of the completed
+                                    completedTask.querySelector("input").setAttribute("disabled", "disabled");
+                                    completedTask.querySelector("span").setAttribute("style", "text-decoration: line-through;");
+                                    //Check if there is no comleted tasks in the array, if true clean - the array
                                     if (i-1 == checked.length ) {
                                         checked = [];
                                     }
                                 }
-
                             });
                     });
                 }

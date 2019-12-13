@@ -47,7 +47,7 @@ fetch('todo.json', {
                         e.preventDefault();
                         let newForm = new FormData();
                         newForm.append("json", JSON.stringify(todoData));
-                        fetch("http://localhost/PHP/Projets/todolist-json/ajax.php", {
+                        fetch("ajax.php", {
                             method: "POST", 
                             body: newForm
                         })
@@ -138,8 +138,6 @@ function addEventsDragAndDrop(el) {
             'method': 'GET'
         }).then(data => data.json()).then(result => {
         const data = result;
-        let textOfDropParagraph;
-        let idOfDropParagraph;
         //get the task of the movable element
         let textOfmovableTask = el.innerHTML;
         //get the id of the movable element
@@ -164,12 +162,11 @@ function addEventsDragAndDrop(el) {
                     } else if (data[i]["id"] == idOfDropParagraph) {
                         data[i]["task"] = textOfmovableTask;
                     }
-                    console.log(data);
                 }
                 //sent new JSON
                 let newFormData = new FormData();
                 newFormData.append("json", JSON.stringify(data));
-                fetch("http://localhost/PHP/Projets/todolist-json/ajax.php", {
+                fetch("ajax.php", {
                     method: "POST", 
                     body: newFormData
                 }) 

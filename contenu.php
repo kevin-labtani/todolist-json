@@ -14,6 +14,7 @@
         return true === $todo['completed'];
     });
 
+
     // generate incomplete todos view
     function generateIncompleteTodos($arrayTodo)
     {
@@ -27,7 +28,6 @@
             </p>';
         }
     }
-
     // generate complete todos view
     function generateCompleteTodos($arrayTodo)
     {
@@ -63,4 +63,3 @@
                 </div>
             </div>
         </div>
-    <script src="assets/js/script.js"></script>

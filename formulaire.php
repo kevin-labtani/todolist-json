@@ -9,7 +9,7 @@
         $newTodo = $_POST['newTodo'];
 
         // validate and sanitize input
-        if (empty($_POST['newTodo'])) {
+        if (empty(trim($_POST['newTodo']))) {
             $errors['newTodo'] = 'Please enter a new Todo';
         } elseif (strlen($_POST['newTodo']) > 50) {
             $errors['newTodo'] = 'The maximum allowed length is 50 characters';

@@ -21,6 +21,7 @@ fetch('todo.json', {
                         }
                     }
                 });
+                console.log(checked);
                 // To make a button submit disabled
                 const validation = [];
                 for(let i = 0; i < toDo.length; i++) {

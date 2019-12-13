@@ -3,11 +3,21 @@
     $newTodo = '';
     $errors = ['newTodo' => ''];
 
+    // reads JSON file into a string
+    $currentJSONTodo = file_get_contents('todo.json');
+    // decode JSON encoded string into an array
+    $arrayTodo = json_decode($currentJSONTodo, true);
+
     // check for submission
     if (isset($_POST['add'])) {
         // assign var
         $newTodo = $_POST['newTodo'];
 
+        foreach ($arrayTodo as $todo) {
+            if ($newTodo == $todo['task'] && false == $todo['completed']) {
+                $errors['newTodo'] = 'This todo is already in the list';
+            }
+        }
         // validate and sanitize input
         if (empty(trim($_POST['newTodo']))) {
             $errors['newTodo'] = 'Please enter a new Todo';
@@ -20,10 +30,6 @@
         // write to json
         // sudo chmod -R 777 todo.json
         if (!array_filter($errors)) {
-            // reads JSON file into a string
-            $currentJSONTodo = file_get_contents('todo.json');
-            // decode JSON encoded string into an array
-            $arrayTodo = json_decode($currentJSONTodo, true);
             // prep new task object for appending to file
             $append = [
                 'id' => sizeof($arrayTodo),

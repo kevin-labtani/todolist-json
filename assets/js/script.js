@@ -8,20 +8,29 @@ fetch('todo.json', {
         const todoData = result;
         let toDo = Array.from(document.getElementsByClassName("toDo"));
         toDo.map(task => {
-            let draggedId = task.getAttribute("id");
-            task.parentElement.querySelector("#" + draggedId).addEventListener('click', e => {
+            // let draggedId = task.getAttribute("id");parentElement.querySelector("#" + draggedId)
+            task.addEventListener('click', e => {
                 const taskId = e.target.getAttribute('id');
                 todoData.forEach(todoTask => {
                     if ("check" + todoTask.id == taskId) {
+                        //add a status complited true
                         if (document.getElementById(taskId).checked == true) {
                             todoTask.completed = true;
-                            checked.push(taskId);
-                        } else {
+                            //Check if the element is not in the array to validate the button submit, if not add the element in the array
+                                if(checked.indexOf(taskId) === -1) {
+                                    checked.push(taskId); 
+                                }
+                            //add a status complited false 
+                        } else if (document.getElementById(taskId).checked == false) {
                             todoTask.completed = false;
+                            //Check if the element is in the array to validate the button submit, if yes,to delete the element from the array
+                            if(checked.indexOf(taskId) >= 0) {
+                                let index = checked.indexOf(taskId);
+                                checked.splice(index, 1);
+                            }
                         }
                     }
                 });
-                console.log(checked);
                 // To make a button submit disabled
                 const validation = [];
                 for(let i = 0; i < toDo.length; i++) {
@@ -38,7 +47,7 @@ fetch('todo.json', {
                         e.preventDefault();
                         let newForm = new FormData();
                         newForm.append("json", JSON.stringify(todoData));
-                        fetch("http://localhost/PHP/Projets/todolist-json/ajax.php", {
+                        fetch("ajax.php", {
                             method: "POST", 
                             body: newForm
                         })
@@ -71,7 +80,6 @@ fetch('todo.json', {
 
     //Get elements
 let draggables = document.querySelector('.draggable');
-console.log(draggables);
 
     //Start of the movement of an element
 function dragStart(e) {
@@ -124,7 +132,48 @@ function addEventsDragAndDrop(el) {
     el.addEventListener('dragleave', dragLeave, false);
     el.addEventListener('drop', dragDrop, false);
     el.addEventListener('dragend', dragEnd, false);
-}
+    el.addEventListener('mousedown', e => {
+        //get JSON
+        fetch('todo.json', {
+            'method': 'GET'
+        }).then(data => data.json()).then(result => {
+        const data = result;
+        //get the task of the movable element
+        let textOfmovableTask = el.innerHTML;
+        //get the id of the movable element
+        let idOfmovableTask = el.getAttribute("id");
+        //get data of the InDrop p 
+            el.addEventListener('dragend', e => {
+                //get the text of the InDrop p
+                textOfDropParagraph = document.getElementById(idOfmovableTask).innerHTML;
+                //get the all elemnts of the InDrop zone
+                let todoArea = document.getElementById("toDoList");
+                let spans = Array.from(todoArea.querySelectorAll("span"));
+                //get the id of the InDrop p
+                for(let i = 0; i < spans.length; i++) {
+                    if (spans[i]["innerHTML"] == textOfmovableTask) {
+                        idOfDropParagraph = spans[i]["id"];
+                    };
+                };
+                 //Change of JSON
+                for(let i = 0; i < data.length; i++) {
+                    if (data[i]["id"] == idOfmovableTask ) {
+                        data[i]["task"] = textOfDropParagraph;
+                    } else if (data[i]["id"] == idOfDropParagraph) {
+                        data[i]["task"] = textOfmovableTask;
+                    }
+                }
+                //sent new JSON
+                let newFormData = new FormData();
+                newFormData.append("json", JSON.stringify(data));
+                fetch("ajax.php", {
+                    method: "POST", 
+                    body: newFormData
+                }) 
+            });
+        })
+    });
+};
 
     //to take elements to use in a function
 let listItens = document.querySelectorAll('.draggable');

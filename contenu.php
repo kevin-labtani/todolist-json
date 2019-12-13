@@ -19,10 +19,10 @@
     {
         foreach ($arrayTodo as $todo) {
             echo '
-            <p class="draggable" draggable="true" id="linecheck' . $todo['id'] . '">
+            <p id="linecheck' . $todo['id'] . '">
                 <label>
                     <input id="check' . $todo['id'] . '" type="checkbox"  name="task[]" class="toDo" value="'.$todo['task'].'" />
-                    <span >'.$todo['task'].'</span>
+                    <span id="' . $todo['id'] . '" class="draggable" draggable="true">'.$todo['task'].'</span>
                 </label>
             </p>';
         }
@@ -32,9 +32,9 @@
     {
         foreach ($arrayTodo as $todo) {
             echo '
-                <p class="draggable" draggable="true">
+                <p>
                     <label>
-                        <input id="' . $todo['id'] . '" type="checkbox" checked disabled />
+                        <input id="checked' . $todo['id'] . '" type="checkbox" checked disabled />
                         <span><del>'.$todo['task'].'</del></span>
                     </label>
                 </p>';

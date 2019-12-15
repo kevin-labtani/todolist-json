@@ -8,6 +8,7 @@ toDo.map(task => {
       method: "GET"
     })
       .then(data => data.json())
+      .catch(error => console.error(error))
       .then(result => {
         const todoData = result;
         const taskId = e.target.getAttribute("id");
@@ -32,53 +33,54 @@ toDo.map(task => {
           }
         });
         // To make a button submit disabled
-        const validation = [];
-        for (let i = 0; i < toDo.length; i++) {
-          if (toDo[i].checked == true) {
-            validation.push(task[i]);
-          }
-        }
-        if (validation.length == 0) {
+        if (checked.length == 0) {
           submit.setAttribute("disabled", "disabled");
         } else {
           submit.removeAttribute("disabled");
-          //To sent the JSON to PHP
-          submit.addEventListener("click", e => {
-            e.preventDefault();
-            let newForm = new FormData();
-            newForm.append("json", JSON.stringify(todoData));
-            fetch("ajax.php", {
-              method: "POST",
-              body: newForm
-            })
-              .then(res => res.json())
-              //to deplace the element to completed
-              .then(data => {
-                for (i = 0; i < checked.length; i++) {
-                  //get the completed task
-                  let completedTask = document.getElementById(
-                    "line" + checked[i]
-                  );
-                  //get the completed area
-                  let completed = document.getElementById("completed");
-                  //add the completed task
-                  completed.appendChild(completedTask);
-                  //change style of the completed
-                  completedTask
-                    .querySelector("input")
-                    .setAttribute("disabled", "disabled");
-                  completedTask
-                    .querySelector("span")
-                    .setAttribute("style", "text-decoration: line-through;");
-                  //Check if there is no comleted tasks in the array, if true clean - the array
-                  if (i - 1 == checked.length) {
-                    checked = [];
-                  }
-                }
-              });
-          });
         }
-      });
+        //To sent the JSON to PHP
+        submit.addEventListener("click", e => {
+          e.preventDefault();
+          let newForm = new FormData();
+          newForm.append("json", JSON.stringify(todoData));
+          fetch("ajax.php", {
+            method: "POST",
+            body: newForm
+          })
+            .then(res => res.json())
+            .catch(error => console.error(error))
+            //to deplace the element to completed
+            .then(data => {
+              for (i = 0; i < checked.length; i++) {
+                //get the completed task
+                let completedTask = document.getElementById(
+                  "line" + checked[i]
+                );
+                //get the completed area
+                let completed = document.getElementById("completed");
+                //add the completed task
+                completed.appendChild(completedTask);
+                //change style of the completed
+                completedTask
+                  .querySelector("input")
+                  .setAttribute("disabled", "disabled");
+                completedTask
+                  .querySelector("span")
+                  .setAttribute("style", "text-decoration: line-through;");
+                //Check if there is no comleted tasks in the array, if true clean - the array
+                let indexOfcompTask = checked.indexOf(checked[i]);
+                checked.splice(indexOfcompTask, 1);
+                if (checked.length == 0) {
+                  submit.setAttribute("disabled", "disabled");
+                } else {
+                  submit.removeAttribute("disabled");
+                }
+              }
+            })
+            .catch(error => console.error(error));
+        });
+      })
+      .catch(error => console.error(error));
   });
 });
 
@@ -164,6 +166,7 @@ function addEventsDragAndDrop(el) {
       method: "GET"
     })
       .then(data => data.json())
+      .catch(error => console.error(error))
       .then(result => {
         const data = result;
         //get the task of the movable element
@@ -200,7 +203,8 @@ function addEventsDragAndDrop(el) {
             body: newFormData
           });
         });
-      });
+      })
+      .catch(error => console.error(error));
   });
 }
 

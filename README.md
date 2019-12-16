@@ -8,7 +8,7 @@ Projet créé le 09 Décembre 2019 dans le cadre de la formation Web Developer d
 
 Le projet est réalisé sur base des [instructions données](https://github.com/becodeorg/CRL-Woods-2.15/blob/master/Projects/TodolistJSON/todolist.md).
 
-Le projet est hébergé sur [Heroku]().
+Le projet est hébergé sur sa propre page: [woodslist](https://woodslist.000webhostapp.com/index.php).
 
 ### **[To-do list](https://github.com/kevin-labtani/todolist-json)**
 

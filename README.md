@@ -16,7 +16,7 @@ Le Projet consiste en un outil de gestion de tâches basique comprenant:
 
 - Un formulaire qui permet d'ajouter une tâche.
 - Un formulaire avec une liste des tâches à faire et, pour chaque tâche, une checkbox permettant de marquer la tâche comme étant accomplie, et un bouton qui permet d'actualiser la liste des tâches.
-- Les tâches encore à accomplir peuvent être réarrangées par drag and drop.
+- Les tâches encore à accomplir peuvent être réarrangées par drag and drop; l'êtat du fichier `todo.json` est mis à jour dynamquement en fonction de l'arrangement des tâches.
 - Une liste des tâches déjà effectuées.
 
 ## Contributeurs
@@ -31,7 +31,9 @@ Le Projet consiste en un outil de gestion de tâches basique comprenant:
 - HTML
 - SASS
 
-Le project est implémenté avec le framework CSS [**MaterializeCSS**](https://materializecss.com/).
+Le project est implémenté avec le framework CSS [**MaterializeCSS**](https://materializecss.com/).  
+
+AJAX est utilisé pour permettre à l'utilisateur de réaranger les tâches et de les cocher comme complétées sans devoir recharger la page.
 
 - [x] HTML validated by [W3C Validator](https://validator.w3.org/)
 - [x] JavaScript formatted with [Prettier](https://prettier.io/)

@@ -1,1 +1,6 @@
-[]
+[
+  { "id": 0, "task": "1st todo", "completed": true },
+  { "id": 1, "task": "3rd todo", "completed": true },
+  { "id": 2, "task": "2nd todo", "completed": false },
+  { "id": 3, "task": "4th todo", "completed": false }
+]

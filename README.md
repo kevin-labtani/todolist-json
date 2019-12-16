@@ -23,9 +23,20 @@ Le Projet consiste en un outil de gestion de tâches basique comprenant:
 - [**Valeriya Kozlova**](https://github.com/ValeriyaKozlova)
 - [**Kevin Labtani**](https://github.com/kevin-labtani)
 
-## Langages et technologies# To-do list, en PHP, JSON et AJAX
+## Langages et technologies
 
-![Aperçu du projet - capture d’écran](./assets/img/.png)
+- PHP
+- JavaScript
+- HTML
+- SASS
+
+Le project est implémenté avec le framework CSS [**MaterializeCSS**](https://materializecss.com/).
+
+- [x] HTML validated by [W3C Validator](https://validator.w3.org/)
+- [x] JavaScript formatted with [Prettier](https://prettier.io/)
+- [x] PHP formatted with [PHP cs fixer](https://github.com/FriendsOfPHP/PHP-CS-Fixer)
+
+## Progression
 
 ## Présentation du Projet
 

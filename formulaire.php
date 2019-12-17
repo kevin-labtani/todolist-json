@@ -29,7 +29,7 @@
 
         // write to json
         // sudo chmod -R 777 todo.json
-        if (!array_filter($errors) && !empty($newTodo) ) {
+        if (!array_filter($errors) && !empty(trim($newTodo))) {
             // prep new task object for appending to file
             $append = [
                 'id' => sizeof($arrayTodo),
